@@ -19,7 +19,7 @@ STREAM_GEN = 0.1
 class Matrix:
     def __init__(self):
         self._init_pygame()
-        self.screen = pygame.display.set_mode()
+        self.screen = pygame.display.set_mode()  # FullScreen
         self.font = pygame.font.SysFont("microsoftyaheimicrosoftyaheiui", 22)
         self.streams = []
 
