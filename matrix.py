@@ -20,6 +20,8 @@ class Matrix:
     def __init__(self):
         self._init_pygame()
         self.screen = pygame.display.set_mode()  # FullScreen
+        self.WIDTH = self.screen.get_size()[0]
+        self.HEIGHT = self.screen.get_size()[1]
         self.font = pygame.font.SysFont("microsoftyaheimicrosoftyaheiui", 22)
         self.streams = []
 
@@ -54,6 +56,9 @@ class Matrix:
 
     def _draw(self):
         self.screen.fill((0, 0, 0))
+        text = self.font.render("<Press ESC to exit>", False, (75, 150, 75))
+        textrect = text.get_rect(center=(self.WIDTH/2, self.HEIGHT-11))
+        self.screen.blit(text, textrect)
         for s in self.streams:
             s.draw()
         pygame.display.flip()
