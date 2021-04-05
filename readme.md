@@ -10,5 +10,5 @@ https://www.youtube.com/watch?v=S1TQCi9axzg
 
 But written in Python with pygame (rather than P5 processing)
 
-![Matrix Rain image](matrix.png){width=100}
+![Matrix Rain image](matrix.png)
 
