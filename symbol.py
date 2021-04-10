@@ -44,11 +44,11 @@ class Symbol:
 
     def reset(self):
         c = random.randint(0, 20)
-        if c < 1:
+        if c < 2:
             self.symbol = chr(0x0391 + round(random.randint(0, 26)))  # Greek unicode block
-        elif c < 3:
-            self.symbol = chr(0x2F00 + round(random.randint(0, 96)))  # Kangxi unicode block
         elif c < 5:
+            self.symbol = chr(0x2F00 + round(random.randint(0, 96)))  # Kangxi unicode block
+        elif c < 8:
             self.symbol = chr(0x0401 + round(random.randint(0, 26)))  # Cyrillic unicode block
         else:
             self.symbol = chr(0x30A0 + round(random.randint(0, 96)))  # katakana unicode block
