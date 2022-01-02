@@ -6,7 +6,6 @@ import pygame
 import random
 from stream import Stream
 
-
 # DIMENSIONS of screen
 WIDTH = 1600
 HEIGHT = 1000
@@ -24,6 +23,8 @@ class Matrix:
         self.HEIGHT = self.screen.get_size()[1]
         self.font = pygame.font.SysFont("microsoftyaheimicrosoftyaheiui", 22)
         self.streams = []
+        # DOWN for TRILOGY, UP for RESURRECTIONS
+        self.direction = "DOWN"
 
     def main_loop(self):
 
@@ -31,13 +32,13 @@ class Matrix:
 
             # Add a new stream if not too many...
             if len(self.streams) < STREAM_MAX and random.random() < STREAM_GEN:
-                stream = Stream(self.screen, self.font)
+                stream = Stream(self.screen, self.font, self.direction)
                 self.streams.append(stream)
 
             self._handle_input()
             self._process_game_logic()
             self._draw()
-            self.streams = [s for s in self.streams if s.visible]
+            self.streams = [s for s in self.streams if s.visible]  # only keep the visible ones
 
     def _init_pygame(self):
         pygame.init()
@@ -49,6 +50,11 @@ class Matrix:
             if event.type == pygame.QUIT or (
                     event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.direction == "DOWN":
+                    self.direction = "UP"
+                else:
+                    self.direction = "DOWN"
 
     def _process_game_logic(self):
         for s in self.streams:
@@ -56,10 +62,9 @@ class Matrix:
 
     def _draw(self):
         self.screen.fill((0, 0, 0))
-        text = self.font.render("<Press ESC to exit>", False, (75, 150, 75))
-        textrect = text.get_rect(center=(self.WIDTH/2, self.HEIGHT-11))
+        text = self.font.render("<Press ESC to exit; Mouse Click to RESURRECT!>", False, (75, 150, 75))
+        textrect = text.get_rect(center=(self.WIDTH / 2, self.HEIGHT - 11))
         self.screen.blit(text, textrect)
         for s in self.streams:
             s.draw()
         pygame.display.flip()
-

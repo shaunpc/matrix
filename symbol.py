@@ -39,8 +39,8 @@ class Symbol:
         textrect = text.get_rect(center=(self.Y, self.X))
         self.screen.blit(text, textrect)
 
-    def visible(self, max_height):
-        return self.X < max_height
+    def visible(self, min_height, max_height):
+        return min(max_height,min_height) <= self.X <= max(max_height,min_height)
 
     def reset(self):
         c = random.randint(0, 20)
